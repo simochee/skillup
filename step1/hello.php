@@ -5,19 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="hello.css">
 </head>
 <body>
   <?php
-    //$hash["one"]が"いち", $hash["two"]が"に", $hash["three"]が"さん"となる連想配列を作成
-    $hash = array("one" => "いち", "two" => "に", "three" => "さん");
-    $hash["four"] = "し";
-    print_r($hash);
-
-    echo '<br>';
-
-    //$hashの各要素を取り出して処理
-    foreach($hash as $key => $val)
-      print("$key is $val. ");
+    //commentがPOSTされているなら
+    if(isset($_POST["comment"])){
+      //エスケープしてから表示
+      $comment = htmlspecialchars($_POST["comment"]);
+      print("あなたのコメントは「 ${comment} 」です。");
+    } else {
+  ?>
+    <p>コメントしてください。</p>
+    <form method="POST" action="">
+      <input name="comment" />
+      <input type="submit" value="送信" class="submit-button" />
+  </form>
+  <?php
+    }
   ?>
 </body>
 </html>
